@@ -1,0 +1,50 @@
+---
+cluster_name: 'mytestcluster'
+
+ambari_version: '2.6.2.2'                                 # must be the 4-part full version number
+
+# Picked from https://supportmatrix.hortonworks.com/
+hdp_version: '2.6.5.0'                                    # must be the 4-part full version number
+hdp_build_number: 'auto'                                  # the HDP build number from docs.hortonworks.com (if set to 'auto', Ansible will try to get it from the repository)
+
+hdf_version: '3.1.2.0'                                    # must be the 4-part full version number
+hdf_build_number: 'auto'                                  # the HDF build number from docs.hortonworks.com (if set to 'auto', Ansible will try to get it from the repository)
+
+#hdpsearch_version: '4.0.0'                                # must be the full version number
+#hdpsearch_build_number: '400'                             # the HDP Search build number from docs.hortonworks.com
+
+repo_base_url: 'http://public-repo-1.hortonworks.com'     # change this if using a Local Repository
+
+
+blueprint_name: '{{ cluster_name }}_blueprint'                  # the name of the blueprint as it will be stored in Ambari
+blueprint_file: 'blueprint_dynamic.j2'                          # the blueprint JSON file - 'blueprint_dynamic.j2' is a Jinja2 template that generates the required JSON
+blueprint_dynamic:                                              # properties for the dynamic blueprint - these are only used by the 'blueprint_dynamic.j2' template to generate the JSON
+  - host_group: "hdp-singlenode"
+    clients: ['ZOOKEEPER_CLIENT', 'HDFS_CLIENT', 'YARN_CLIENT', 'MAPREDUCE2_CLIENT', 'TEZ_CLIENT', 'SLIDER', 'PIG', 'SQOOP', 'HIVE_CLIENT', 'HCAT', 'OOZIE_CLIENT', 'INFRA_SOLR_CLIENT', 'SPARK2_CLIENT', 'HBASE_CLIENT']
+    services:
+      - ZOOKEEPER_SERVER
+      - NAMENODE
+      - SECONDARY_NAMENODE
+      - DATANODE
+      - RESOURCEMANAGER
+      - NODEMANAGER
+      - APP_TIMELINE_SERVER
+      - HISTORYSERVER
+      - HIVE_SERVER
+      - HIVE_METASTORE
+      - WEBHCAT_SERVER
+      - OOZIE_SERVER
+      - HBASE_MASTER
+      - HBASE_REGIONSERVER
+      - SPARK2_JOBHISTORYSERVER
+      - ZEPPELIN_MASTER
+      - KNOX_GATEWAY
+      - HST_SERVER
+      - ACTIVITY_ANALYZER
+      - ACTIVITY_EXPLORER
+      - HST_AGENT
+      - AMBARI_SERVER
+      - INFRA_SOLR
+      - METRICS_COLLECTOR
+      - METRICS_GRAFANA
+      - METRICS_MONITOR
