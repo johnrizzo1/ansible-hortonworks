@@ -1,7 +1,9 @@
 ---
 cluster_name: 'mytestcluster'
 
-ambari_version: '2.6.2.2'                                 # must be the 4-part full version number
+# ambari_version: '2.7.5.0'
+ambari_version: '2.6.2.2'
+# ambari_version: '2.6.2.2'
 
 # Picked from https://supportmatrix.hortonworks.com/
 hdp_version: '2.6.5.0'                                    # must be the 4-part full version number
